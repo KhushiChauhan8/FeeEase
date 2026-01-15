@@ -1,21 +1,16 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const feesSchema = new mongoose.Schema(
     {
         studentName: {
             type: String,
-            required: true,
+            required: [true, "Student name is required"],
             trim: true
         },
 
         studentId: {
             type: String,
-            required: true
-        },
-
-        class: {
-            type: String,
-            required: true
+            required: [true, "Student ID is required"]
         },
 
         month: {
@@ -25,29 +20,16 @@ const feesSchema = new mongoose.Schema(
 
         amount: {
             type: Number,
-            required: true
+            required: true,
+            min: [0, "Amount cannot be negative"]
         },
 
         status: {
             type: String,
             enum: ["PAID", "PENDING"],
             default: "PENDING"
-        },
-
-        paymentDate: {
-            type: Date
-        },
-
-        paymentMode: {
-            type: String,
-            enum: ["CASH", "UPI", "CARD", "BANK"]
         }
-    },
-    {
-       timestamps: true
-    }
+    }, { timestamps: true }
 );
 
-const Fees = mongoose.model("Fees", feesSchema);
-
-export default Fees;
+export default mongoose.model("Fees", feesSchema);
