@@ -47,7 +47,7 @@ export const getAllFees = async (req, res) => {
         const total = await Fees.countDocuments(query);
 
         res.status(200).json({
-            success; true,
+            success: true,
             totalRecords: total,
             currentPage: Number(page),
             totalPages: Math.ceil(total / limit),
